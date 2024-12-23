@@ -15,6 +15,7 @@ import * as Contacts from "expo-contacts";
 import { Share } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
 import { Audio } from "expo-av";
+import { LinearGradient } from 'expo-linear-gradient';
 
 const ProgressScreen = () => {
   const navigation = useNavigation();
@@ -65,7 +66,7 @@ const ProgressScreen = () => {
     setTimeout(() => {
       setShowConfetti(false);
       setShowPointAnimation(false);
-    },3000);
+    }, 3000);
   };
 
   const handleFinish = (workout, index) => {
@@ -128,12 +129,12 @@ const ProgressScreen = () => {
       <Text style={styles.workoutText}>Reps: {item.reps}</Text>
       <Text style={styles.workoutText}>Sets: {item.sets}</Text>
       <View style={styles.buttonContainer}>
-      <TouchableOpacity
-        onPress={() => handleFinish(item, index)}
-        style={styles.button}
-      >
-        <Text style={styles.buttonText}>Finish</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => handleFinish(item, index)}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>Finish</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={() => handleEdit(item, index)}
           style={styles.button}
@@ -157,7 +158,10 @@ const ProgressScreen = () => {
   );
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+    colors={["#FF7E5F", "#FD3A69", "#A224D0"]}
+      style={styles.container}
+    >
       <Text style={styles.pointsHeader}>Total Points Earned: {points}</Text>
 
       {workouts.length === 0 ? (
@@ -186,13 +190,7 @@ const ProgressScreen = () => {
           color="#FF5722"
         />
       </View>
-
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>
-          © 2024 FitnessApp | All Rights Reserved
-        </Text>
-      </View>
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -200,12 +198,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#f0f8ff",
   },
   pointsHeader: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#4CAF50",
+    color: "#4b0082",
     marginBottom: 10,
     textAlign: "center",
   },
@@ -223,7 +220,7 @@ const styles = StyleSheet.create({
   },
   workoutText: {
     fontSize: 18,
-    color: "#FF5722",
+    color: "#4b0082",
     marginBottom: 5,
   },
   buttonContainer: {
@@ -248,6 +245,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#BDBDBD",
     textAlign: "center",
+    fontStyle: "italic"
   },
   addButtonContainer: {
     marginTop: 30,

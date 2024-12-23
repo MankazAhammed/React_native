@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "mob_website",
+    "name": "The Muscle Hustle",
     "slug": "mob_website",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/splashlogo.png",
     "userInterfaceStyle": "light",
-    "newArchEnabled": true,
+    "newArchEnabled": false,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/splashlogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,9 +17,11 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/adaptive.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.mankaz_ahammed.muscle_hustle",
+      "permissions": []
     },
     "web": {
       "favicon": "./assets/favicon.png"

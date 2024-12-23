@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, Button, Alert, StyleSheet } from 'react-native';
+import { View, Text, Button, Alert, StyleSheet, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient'; // Added LinearGradient import
 
 const FitnessEventScreen = () => {
   const navigation = useNavigation();
   const [events] = useState([
-    { id: 1, name: 'Yoga for Beginners', date: '2024-12-25', location: 'Central Park' },
-    { id: 2, name: 'HIIT Challenge', date: '2024-12-28', location: 'Downtown Gym' },
-    { id: 3, name: 'Cycling Marathon', date: '2024-12-30', location: 'Mountain Trails' },
+    { id: 1, name: 'Yoga for Beginners', date: '2025-3-25', location: 'Central Park' },
+    { id: 2, name: 'HIIT Challenge', date: '2025-2-28', location: 'Downtown Gym' },
+    { id: 3, name: 'Cycling Marathon', date: '2025-1-30', location: 'Mountain Trails' },
   ]);
 
   const handleAttend = () => {
@@ -15,7 +16,7 @@ const FitnessEventScreen = () => {
   };
 
   const handleShareWithFriend = () => {
-    // Navigate to ContactsScreen Screen for sharing
+    // Navigate to ContactsScreen for sharing
     navigation.navigate('ContactsScreen');
   };
 
@@ -36,10 +37,18 @@ const FitnessEventScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Upcoming Fitness Events</Text>
-      {events.map((event) => renderEvent(event))}
-    </View>
+    <LinearGradient
+      colors={['#FF5722', '#FF7043']} // Gradient colors
+      style={styles.container}
+    >
+      <Text style={styles.header}>Fitness Events</Text>
+      <Text style={styles.description}>
+        Stay active and join our upcoming fitness events to push your limits and achieve your fitness goals. From yoga to high-intensity training, there's something for everyone.
+      </Text>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        {events.map((event) => renderEvent(event))}
+      </ScrollView>
+    </LinearGradient>
   );
 };
 
@@ -47,14 +56,24 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#f0f8ff",
   },
   header: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     textAlign: 'center',
+    marginBottom: 10,
+    color: "#4b0082",
+  },
+  description: {
+    fontSize: 14,
+    fontWeight: '400',
+    textAlign: 'center',
     marginBottom: 20,
-    color: '#FF5722',
+    color: "#4b0082",
+    fontStyle: "italic"
+  },
+  scrollContainer: {
+    paddingBottom: 20, // Add bottom padding for scrollable content
   },
   eventItem: {
     backgroundColor: '#FFF',

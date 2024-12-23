@@ -18,11 +18,11 @@ const SplashScreen = ({ onFinish }) => {
   return (
     <View style={styles.container}>
       <Animated.Image
-        source={require("../assets/splash-logo.webp")}
+        source={require("../assets/splashlogo.png")}
         style={[styles.logo, { opacity: fadeAnim }]}
         resizeMode="contain"
       />
-      <Text style={styles.appName}>Muscle Hustle</Text>
+      <Text style={styles.appName}>The Muscle Hustle</Text>
       <Text style={styles.tagline}>Fitness Tracker</Text>
     </View>
   );
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#FF5722",
+    backgroundColor: "white",
   },
   logo: {
     width: 150,
@@ -43,13 +43,13 @@ const styles = StyleSheet.create({
   appName: {
     fontSize: 28,
     fontWeight: "bold",
-    color: "white",
+    color: "black",
     marginBottom: 10,
   },
   tagline: {
     fontSize: 20,
     fontWeight: "600",
-    color: "white",
+    color: "black",
   },
 });
 

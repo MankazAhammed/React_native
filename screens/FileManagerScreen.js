@@ -10,6 +10,7 @@ import {
   StyleSheet,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { LinearGradient } from "expo-linear-gradient"; // Added LinearGradient import
 
 const FileManagerScreen = ({ navigation }) => {
   const [selectedImages, setSelectedImages] = useState([]);
@@ -64,7 +65,10 @@ const FileManagerScreen = ({ navigation }) => {
   );
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+    colors={["#FF7E5F", "#FD3A69", "#A224D0"]} // Gradient colors
+      style={styles.container}
+    >
       <Text style={styles.instructionText}>
         You can upload workout images or workout module images below.
       </Text>
@@ -86,7 +90,7 @@ const FileManagerScreen = ({ navigation }) => {
         numColumns={4}
         contentContainerStyle={styles.imageGrid}
       />
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -96,14 +100,13 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     alignItems: "center",
     paddingTop: 30,
-    backgroundColor: "#f0f8ff", // Light blue background, common for all
   },
   instructionText: {
     fontSize: 18,
     fontWeight: "600",
     textAlign: "center",
     marginBottom: 10,
-    color: "#4b0082", // Indigo color for text
+    color: "#4b0082",
     fontStyle: "italic",
   },
   detailsText: {

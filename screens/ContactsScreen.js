@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import { useNavigation } from '@react-navigation/native';
+import { LinearGradient } from 'expo-linear-gradient'; // Added LinearGradient import
 
 const ContactsScreen = () => {
   const navigation = useNavigation();
@@ -23,7 +24,10 @@ const ContactsScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+    colors={["#FF7E5F", "#FD3A69", "#A224D0"]} // Gradient colors
+      style={styles.container}
+    >
       <Text style={styles.header}>Select a Contact</Text>
       {contacts.length > 0 ? (
         <FlatList
@@ -41,7 +45,7 @@ const ContactsScreen = () => {
       ) : (
         <Text style={styles.noContacts}>No contacts found.</Text>
       )}
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -49,14 +53,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#f5f5f5',
   },
   header: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 10,
     textAlign: 'center',
-    color: '#FF5722',
+    color: "#4b0082",
   },
   contactItem: {
     padding: 10,

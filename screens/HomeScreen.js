@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
   View,
-  Button,
   StyleSheet,
   Text,
-  ImageBackground,
   Animated,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import * as Location from "expo-location";
+import { LinearGradient } from "expo-linear-gradient";
 
 const HomeScreen = ({ navigation }) => {
   const [location, setLocation] = useState(null);
@@ -35,19 +34,30 @@ const HomeScreen = ({ navigation }) => {
           latitude,
           longitude,
         });
+        console.log("Address data:", address);
 
-        // Prepare location string with available data
-        const locationString = [
+        let locationString = [
           address.city,
-          address.subregion || address.county,
+          address.region || address.county,
           address.country,
         ]
-          .filter((part) => part)
+          .filter((part) => part) // Filter out any empty parts
           .join(", ");
+
+        // If no valid location information, fallback to formatted address
+        if (
+          !locationString ||
+          address.city === null ||
+          address.county === null ||
+          address.country === null
+        ) {
+          locationString = address.formattedAddress || "Address not available";
+        }
 
         setLocation(locationString);
       } catch (error) {
         setErrorMsg("Error fetching location");
+        console.error(error); // Log any error to the console
       }
     };
 
@@ -76,33 +86,35 @@ const HomeScreen = ({ navigation }) => {
       onPressOut={handlePressOut}
       onPress={onPress}
     >
-      <Animated.View style={[styles.animatedButton, { transform: [{ scale: scaleAnimation }] }]}>
+      <Animated.View
+        style={[
+          styles.animatedButton,
+          { transform: [{ scale: scaleAnimation }] },
+        ]}
+      >
         <Text style={styles.buttonText}>{title}</Text>
       </Animated.View>
     </TouchableWithoutFeedback>
   );
 
   return (
-    <ImageBackground
-      source={require("../assets/workout-bg.webp")}
+    <LinearGradient
+      colors={["#FF7E5F", "#FD3A69", "#A224D0"]} // Gradient with vibrant colors
       style={styles.background}
     >
       <View style={styles.container}>
-        <StatusBar style="dark" />
+        <StatusBar style="light" />
 
-        {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.headerText}>Welcome to Muscle Hustle</Text>
+          <Text style={styles.headerText}>Welcome to The Muscle Hustle</Text>
         </View>
 
-        {/* Location Info - More Attractive */}
         <View style={styles.locationContainer}>
           <Text style={styles.locationText}>
-            {location || errorMsg || "Fetching..."}
+            Location: {location || errorMsg || "Fetching..."}
           </Text>
         </View>
 
-        {/* Main Content */}
         <View style={styles.buttonContainer}>
           <AnimatedButton
             title="Add a Workout"
@@ -127,17 +139,18 @@ const HomeScreen = ({ navigation }) => {
 
         {/* Footer */}
         <View style={styles.footer}>
-          <Text style={styles.footerText}>© 2024 FitnessApp | All Rights Reserved</Text>
+          <Text style={styles.footerText}>
+            © 2024 FitnessApp | All Rights Reserved
+          </Text>
         </View>
       </View>
-    </ImageBackground>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    resizeMode: "cover",
   },
   container: {
     flex: 1,
@@ -158,22 +171,29 @@ const styles = StyleSheet.create({
   },
   locationContainer: {
     position: "absolute",
-    top: 100, // Adjusted for better visibility
-    right: 20,
-    backgroundColor: "rgba(0, 0, 0, 0.7)",
-    paddingVertical: 10,
-    paddingHorizontal: 15,
-    borderRadius: 10,
+    top: 100,
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    paddingVertical: 12,
+    paddingHorizontal: 18,
+    borderRadius: 20,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 3,
-  },
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.3,
+    shadowRadius: 10,
+    elevation: 8,
+    borderWidth: 1,
+    borderColor: "#FFFFFF",
+    alignItems: "center",
+  },  
   locationText: {
-    color: "white",
-    fontSize: 16, // Increased font size for better readability
+    color: "#FFFFFF",
+    fontSize: 12,
     fontWeight: "bold",
-  },
+    textAlign: "center",
+    paddingHorizontal: 10,
+  },  
   buttonContainer: {
     flex: 1,
     justifyContent: "center",

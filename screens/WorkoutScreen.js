@@ -4,6 +4,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from "expo-haptics";
 import { StatusBar } from "expo-status-bar";
+import { LinearGradient } from 'expo-linear-gradient'; // Added import
 
 const WorkoutScreen = () => {
   const navigation = useNavigation();
@@ -41,9 +42,12 @@ const WorkoutScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+    colors={["#FF7E5F", "#FD3A69", "#A224D0"]} // Added gradient colors
+      style={styles.container}
+    >
       <StatusBar style="dark" />
-      <Text style={styles.headerText}>Workout Details</Text>
+      <Text style={styles.headerText}>Add/Edit Workout</Text>
       <Text style={styles.descriptionText}>
         Enter the details of your workout below. You can add a new workout or
         edit an existing one.
@@ -72,14 +76,9 @@ const WorkoutScreen = () => {
       <Button
         title={workoutToEdit ? "Edit Workout" : "Add Workout"}
         onPress={handleSave}
-        color="#4CAF50" // Using the same color as before, or you can customize
+        color="#FF5722" // Updated color as per the request
       />
-
-      {/* Footer */}
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>© 2024 FitnessApp | All Rights Reserved</Text>
-      </View>
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -88,7 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: "center",
-    backgroundColor: "#f0f8ff",
+    backgroundColor: "#f0f8ff", // Default background if gradient fails
   },
   input: {
     height: 50,
@@ -107,27 +106,15 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     textAlign: "center",
+    color: "#4b0082",
     marginBottom: 10,
-    color: "#FF5722",
   },
   descriptionText: {
     fontSize: 16,
     textAlign: "center",
     marginBottom: 20,
-    color: "#333",
-  },
-  footer: {
-    position: "absolute",
-    bottom: 10,
-    width: "100%",
-    alignItems: "center",
-    backgroundColor: "#f0f8ff",
-    paddingTop: 10,
-    paddingBottom: 20,
-  },
-  footerText: {
-    color: "#4CAF50",
-    fontSize: 12,
+    color: "#4b0082",
+    fontStyle: "italic"
   },
 });
 
